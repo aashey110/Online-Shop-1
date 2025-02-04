@@ -1,0 +1,80 @@
+{% extends "master.html" %}
+
+
+{% block content %}
+<style>
+
+    .hero-section {
+      background: linear-gradient(to bottom right, #4facfe, #00f2fe);
+      color: white;
+      text-align: center;
+      padding: 100px 20px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-section h1 {
+      font-size: 3rem;
+      font-weight: bold;
+    }
+    .hero-section p {
+      font-size: 1.2rem;
+      margin-top: 10px;
+    }
+    .hero-section .btn {
+      margin-top: 20px;
+    }
+    .card:hover {
+      transform: scale(1.05);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+      transition: all 0.3s ease-in-out;
+    }
+    .card-link {
+      display: block;
+      text-decoration: none;
+    }
+    
+    .card-link .card {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    .card-link .card:hover {
+      transform: scale(1.05);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    }
+    
+    .card-link .card .card-body {
+      padding: 20px;
+    }
+  </style>
+<!-- Hero Section -->
+<section class="hero-section">
+  <div class="container">
+    <h1>Welcome to E-Shop</h1>
+    <p>Your one-stop destination for all your shopping needs.</p>
+    <a href="{% url "shop" %}" class="btn btn-lg btn-light">Shop Now</a>
+  </div>
+</section>
+
+
+<!-- Featured Products -->
+<div class="container py-5">
+  <h2 class="text-center mb-4">Featured Products</h2>
+  <div class="row g-4">
+    {% for items in products %}
+    <div class="col-lg-3 col-md-6">
+      <a href="{% url "product_detail" items.id %}" class="card-link">
+      <div class="card">
+        <img src="{{ items.image.url }}" class="card-img-top" alt="Product 1">
+        <div class="card-body">
+          <h5 class="card-title">{{ items.name }}</h5>
+          <p class="card-text">Rs. {{ items.price }}</p>
+        </div>
+      </div>
+    </a>
+  </div>
+  {% endfor %}
+
+  </div>
+</div>
+{% endblock content %}
+

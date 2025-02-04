@@ -1,0 +1,61 @@
+{% extends "master.html" %}
+
+<body>
+
+{% block content %}
+<!-- Product Details -->
+<div class="container py-5">
+  {% if product %}
+  <div class="row">
+    <div class="col-lg-6">
+      <img src="{{ product.image.url }}" alt="Product Image" class="img-fluid product-image">
+    </div>
+    <div class="col-lg-6">
+      <h1 class="display-5">{{product.name}}</h1>
+      {% comment %} <p class="text-muted">Category: Electronics</p> {% endcomment %}
+      <h3 class="text-primary">Rs. {{product.price}}</h3>
+      <p>{{product.description}}</p>
+      <form method="POST" action="{% url 'add_to_cart' product.id %}">
+        {% csrf_token %}
+        <div class="d-flex align-items-center mb-3">
+          <label for="quantity" class="me-2">Quantity:</label>
+          <input type="number" id="quantity" name="quantity" class="form-control" style="width: 100px;" value="1">
+        </div>
+        <button type="submit" class="btn btn-buy btn-lg me-2">Add to Cart</button>
+      </form>
+      
+      {% if messages %}
+        <div class="alert alert-success mt-3">
+          {% for message in messages %}
+            <p>{{ message }}</p>
+          {% endfor %}
+        </div>
+      {% endif %}
+      <hr>
+      <h5>Product Details</h5>
+      <ul>
+        <li>Feature 1: High-quality material</li>
+        <li>Feature 2: 1-year warranty</li>
+        <li>Feature 3: Lightweight and portable</li>
+      </ul>
+    </div>
+  </div>
+  {% endif %}
+</div>
+<style>
+  .product-image {
+    border-radius: 10px;
+    transition: transform 0.3s ease;
+  }
+  .product-image:hover {
+    transform: scale(1.05);
+  }
+  .btn-buy {
+    background-color: #007bff;
+    color: white;
+  }
+  .btn-buy:hover {
+    background-color: #0056b3;
+  }
+</style>
+{% endblock  %}

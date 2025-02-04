@@ -1,0 +1,68 @@
+{% extends "master.html" %}
+{% block content %}
+
+<!-- Registration Form -->
+<div class="container py-5">
+  <h2 class="text-center mb-4">Create Account</h2>
+  <div class="register-form">
+    <form method="POST" action="{% url 'register' %}">
+      {% csrf_token %}
+      <div class="mb-3">
+        <label for="full_name" class="form-label">Full Name</label>
+        <input type="text" class="form-control" id="full_name" name="full_name" required>
+      </div>
+      <div class="mb-3">
+        <label for="email" class="form-label">Email Address</label>
+        <input type="email" class="form-control" id="email" name="email" required>
+      </div>
+      <div class="mb-3">
+        <label for="username" class="form-label">Username</label>
+        <input type="text" class="form-control" id="username" name="username" required>
+      </div>
+      <div class="mb-3">
+        <label for="password" class="form-label">Password</label>
+        <input type="password" class="form-control" id="password" name="password" required>
+      </div>
+      <div class="mb-3">
+        <label for="confirm_password" class="form-label">Confirm Password</label>
+        <input type="password" class="form-control" id="confirm_password" name="confirm_password" required>
+      </div>
+      <div class="mb-3">
+        <label for="phone" class="form-label">Phone Number (optional)</label>
+        <input type="text" class="form-control" id="phone" name="phone">
+      </div>
+      <div class="mb-3">
+        <label for="address" class="form-label">Address (optional)</label>
+        <textarea class="form-control" id="address" name="address"></textarea>
+      </div>
+      
+      <button type="submit" class="btn btn-primary">Create Account</button>
+    </form>
+    <div class="text-center mt-3">
+      <p>Already have an account? <a href="{% url "login" %}">Login here</a></p>
+    </div>
+  </div>
+</div>
+
+<style>
+
+  .register-form {
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 30px;
+    background-color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+  }
+  .btn-register {
+    background-color: #007bff;
+    color: white;
+  }
+  .btn-register:hover {
+    background-color: #0056b3;
+  }
+  .form-check-label {
+    font-size: 0.9rem;
+  }
+</style>
+{% endblock %}

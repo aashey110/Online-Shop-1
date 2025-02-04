@@ -1,0 +1,54 @@
+{% extends "master.html" %}
+<body>
+{% block content %}
+
+<!-- Cart Page -->
+<div class="container py-5">
+  <h1 class="mb-4">Your Cart</h1>
+  <div class="table-responsive">
+    <table class="table cart-table">
+      <thead>
+        <tr>
+          <th scope="col">Product</th>
+          <th scope="col">Name</th>
+          <th scope="col">Price</th>
+          <th scope="col">Quantity</th>
+          <th scope="col">Total</th>
+          <th scope="col">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for items in cart_items %}
+        <tr>
+          <td><img src="{{items.product.image.url}}" alt="Product Image"></td>
+          <td>{{items.product.name}}</td>
+          <td>Rs. {{items.product.price}}</td>
+          <td><input type="number" class="form-control" value="{{items.quantity}}" style="width: 80px;"></td>
+          <td><input type="number" class="form-control" value="{{items.total_price}}" style="width: 80px;" readonly></td>
+          <td><button class="btn btn-danger btn-sm">Remove</button></td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  <div class="d-flex justify-content-between align-items-center mt-4">
+    <h3>Total: <span class="text-primary">Rs. {{total_price}}</span></h3>
+    <button class="btn btn-checkout btn-lg">Proceed to Checkout</button>
+  </div>
+</div>
+<style>
+  .cart-table img {
+    width: 100px;
+    height: auto;
+    border-radius: 5px;
+  }
+  .btn-checkout {
+    background-color: #007bff;
+    color: white;
+  }
+  .btn-checkout:hover {
+    background-color: #0056b3;
+  }
+
+</style>
+{% endblock %}
